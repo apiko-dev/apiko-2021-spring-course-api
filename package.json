@@ -1,0 +1,71 @@
+{
+  "name": "apiko-spring-2021-courses-api",
+  "version": "0.1.0",
+  "description": "API for Apiko spring 2021 courses",
+  "main": "build/main.js",
+  "scripts": {
+    "start": "node build/main.js",
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "node_modules/.bin/babel src -d ./build",
+    "build": "npm run clean && npm run build-server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=development node src/index.js",
+    "db:update": "sh ./operations/scripts/heroku_db_update.sh",
+    "migrate:update": "cd migrations/schema && ./liquibase.groovy update",
+    "migrate:rollback:all": "cd migrations/schema && ./liquibase.groovy rollbackCount 9000",
+    "migrate:rollback": "cd migrations/schema && ./liquibase.groovy rollback rollbackCount 1",
+    "docker:dev": "NODE_ENV=development nodemon --inspect=0.0.0.0 src/index.js",
+    "docker:build": "./operations/scripts/build.sh",
+    "docker:run": "./operations/scripts/run.sh",
+    "docker:up": "npm run docker:build && npm run docker:run",
+    "docker:migrate:update": "./operations/scripts/migrate.sh update",
+    "docker:migrate:rollback": "./operations/scripts/migrate.sh rollbackCount 1",
+    "docker:migrate:rollback:all": "./operations/scripts/migrate.sh rollbackCount 9000",
+    "docker:migrate:clearCheckSums": "./operations/scripts/migrate.sh clearCheckSums"
+  },
+  "keywords": [
+    "apiko",
+    "courses"
+  ],
+  "author": "Apiko",
+  "license": "ISC",
+  "engines": {
+    "node": "14.x"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "core-js": "^3.15.2",
+    "dotenv": "^10.0.0",
+    "fast-json-stringify": "^2.7.7",
+    "fastify": "^3.18.1",
+    "fastify-jwt": "^3.0.0",
+    "fastify-oas": "^3.0.8",
+    "fastify-swagger": "^4.8.2",
+    "libphonenumber-js": "^1.9.20",
+    "lodash": "^4.17.21",
+    "pg": "^8.6.0",
+    "pino": "^6.11.3",
+    "pino-pretty": "^5.1.0",
+    "regenerator-runtime": "^0.13.7",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.14.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.5",
+    "@babel/preset-env": "^7.14.7",
+    "@babel/register": "^7.14.5",
+    "@babel/eslint-parser": "^7.14.7",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-formatter-pretty": "^4.1.0",
+    "eslint-import-resolver-babel-module": "^5.3.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.9",
+    "prettier": "^2.3.2"
+  }
+}
