@@ -23,10 +23,12 @@ export function getProducts({ userId, limit, offset, sortBy }) {
   return getList(query, params);
 }
 
-export function getProduct({ id }) {
+export function getProduct({ id, userId }) {
   const { query, params } = sql`
 
-    SELECT p.*
+    SELECT
+      ${ifDef(userId, views.getFavoriteState(userId))}
+      p.*
     FROM (${views.products}) AS p
     WHERE p.id = ${id};
 
