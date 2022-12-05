@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 
 import fastify from 'fastify';
 import fastifyOAS from 'fastify-swagger';
+import fastifyCors from 'fastify-cors';
 import fastifyJwt from 'fastify-jwt';
 
 import * as logging from 'services/logging';
@@ -19,6 +20,10 @@ const app = fastify({
     },
   },
 })
+  .register(fastifyCors, {
+    origin: true,
+    methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  })
   .register(fastifyJwt, {
     secret: configs.app.secret1,
   })
