@@ -38,6 +38,7 @@
     "dotenv": "^10.0.0",
     "fast-json-stringify": "^2.7.7",
     "fastify": "^3.18.1",
+    "fastify-cors": "^6.1.0",
     "fastify-jwt": "^3.0.0",
     "fastify-oas": "^3.0.8",
     "fastify-swagger": "^4.8.2",
